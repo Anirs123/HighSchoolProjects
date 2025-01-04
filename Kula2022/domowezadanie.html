@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pl">
+	<head>
+		<meta charset="utf8">
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<title>JavaScript Zadanie Szymon Byliński</title>
+		<script>
+		//ZADANIE WYKONANE PRZEZ SZYMONA BYLIŃSKIEGO
+
+		let pi = 3.14;
+		const odp = prompt('Obliczenia z kulą, czy chcesz zacząć? (t/n)');
+
+		switch (odp) {
+			case "t":
+			case "tak":
+				const odpA = prompt('Podaj promień r kuli (np. 4) cm'); // PROMIEŃ KULI i LINIA PROMIENIA R KULI
+				document.write(`<div class="kula"><hr class="linia"></hr></div>`); // tworzy div klasy kula
+				document.write(`<div class="tekst"><h2>KULA W 2D</h2></div>`); // tworzy div klasy kula
+				document.write(`<h2 class="promien">r = ${odpA}cm</h2>`); // PROMIEŃ R NA KULI
+				document.write(`<img src="javascript.png">`);
+				document.write(`<br><br><h1>DANE:</h1>`);
+				document.write(`<br><h2>Promień r = ${odpA}cm </h2>`); // PROMIEŃ KULI WYPRINTOWANY
+
+				const odpB = prompt('Czy chcesz obliczyć obwód kuli? (t/n)');
+				switch (odpB) {
+					case "t":
+					case "tak":
+						document.write(`<h2>Obwód = ${Math.round(2 * pi * odpA)}cm </h2>`); // OBWÓD KULI
+						break;
+					default:
+						document.write(`<h2>Brak zgody!</h2>`);
+				}
+
+				const odpC = prompt('Czy chcesz obliczyć pole powierzchni kuli? (t/n)');
+				switch (odpC) {
+					case "t":
+					case "tak":
+						document.write(`<h2>Pole powierzchni = ${4 * pi * Math.pow(odpA, 2)}cm<sup>2</sup> </h2>`); // POLE POWIERZCHNI
+						break;
+					default:
+						document.write(`<h2>Brak zgody!</h2>`);
+				}
+
+				const odpD = prompt('Czy chcesz obliczyć objętość kuli? (t/n)');
+				switch (odpD) {
+					case "t":
+					case "tak":
+						document.write(`<h2>Objętość = ${Math.round(4 / 3 * pi * Math.pow(odpA, 3))}cm<sup>3</sup> </h2>`); // OBJĘTOŚĆ
+						break;
+					default:
+						document.write(`<h2>Brak zgody!</h2>`);
+				}
+
+				const odpE = prompt('Czy chcesz obliczyć pole przekroju kuli? (t/n)');
+				switch (odpE) {
+					case "t":
+					case "tak":
+						document.write(`<h2>Pole przekroju = ${pi * Math.pow(odpA, 2)}cm </h2>`); // POLE PRZEKROJU
+						break;
+					default:
+						document.write(`<h2>Brak zgody!</h2>`);
+				}
+
+				const odpF = prompt('Czy chcesz obliczyć średnicę kuli? (t/n)');
+				switch (odpF) {
+					case "t":
+					case "tak":
+						document.write(`<h2>Średnica = ${2 * odpA}cm </h2><br>`); // ŚREDNICA
+						break;
+					default:
+						document.write(`<h2>Brak zgody!</h2>`);
+				}
+
+				const a = [odpA];
+				if (a <= 0) { // Jeżeli promień <= 0
+					document.write('<br><h3 style="color: red;">Podałeś liczby ujemne bądź równe zero spróbuj ponownie :(</h3>');
+				}
+
+				document.write(`<div class="wzory"><h1>WZORY:</h1><br>
+									<p>Obwód = 2⋅π⋅r<br></p>
+									<p>Pole powierzchni = 4⋅π⋅r<sup>2</sup><br></p>
+									<p>Objętość = 4/3⋅π⋅r<sup>3</sup><br></p>
+									<p>Pole przekroju = π⋅r<sup>2</sup><br></p>
+									<p>Średnica = 2⋅r<br></p>
+								</div>`);
+				break;
+
+			case "n":
+			case "nie":
+				document.write(`<br><br><h1>Brak zgody!</h1>`);
+				break;
+
+			default:
+				document.write("<h1>Nie napisałeś tak lub nie</h1>"); // Sprzeczne odpowiedzi
+		}
+
+		// METODA ELSE IF (wolniejsza)
+
+		// let pi = 3.14;
+		// 	const odp = prompt('Obliczenia z kulą, czy chcesz zacząć? (t/n)');
+		// 	if(odp == "t" || odp == "tak"){
+		// 		const odpA = prompt('Podaj promień r kuli (np. 4) cm'); // ILE BEDZIE MIAL PROMIEN KULI
+		// 			document.write(`<div class="kula"></div>`); //tworzy div klasy kula
+		// 			document.write(`<div class="tekst"><h2>KULA W 2D</h2></div>`); //tworzy div klasy kula
+		// 			document.write(`<h2 class="promien">r = ${odpA}cm</h2>`); //PROMIEN R NA KULI
+		// 			document.write(`<hr class="linia"></hr>`); // LINIA PROMIENIA R KULI
+		// 			document.write(`<img src="javascript.png">`);
+		// 			document.write(`<br><br><h1>DANE:</h1>`);
+		// 			document.write(`<br><h2>Promień r = ${odpA}cm </h2>`); // WYNIK PROMIENIA KULI WYPRINTOWANY
+		// 		const odpB = prompt('Czy chcesz obliczyć obwód kuli? (t/n)');
+		// 		if(odpB == "t" || odpB == "tak"){
+		// 			document.write(`<h2>Obwód = ${2 * pi * odpA}cm </h2>`); // WZOR NA OBWOD KOLA
+		// 		}
+		// 		else{
+		// 			document.write(`<h2> Brak zgody! </h2>`); // WZOR NA OBWOD KOLA
+		// 		}
+		// 		const odpC = prompt('Czy chcesz obliczyć pole powierzchni kuli? (t/n)');
+		// 		if(odpC == "t" || odpC == "tak"){
+		// 			document.write(`<h2>Pole powierzchni = ${4 * pi * Math.pow(odpA, 2)}cm<sup>2</sup> </h2>`);
+		// 		} // Mat.pow to potęgowanie - Math.pow(zmienna, potega)
+		// 		else{
+		// 			document.write(`<h2> Brak zgody! </h2>`); // WZOR NA OBWOD KOLA
+		// 		}
+		// 		const odpD = prompt('Czy chcesz obliczyć objętość kuli? (t/n)');
+		// 		if(odpD == "t" || odpD == "tak"){
+		// 			document.write(`<h2>Objętość = ${Math.round(4/3 * pi * Math.pow(odpA, 3))}cm<sup>3</sup> </h2>`);
+		// 		}
+		// 		else{
+		// 			document.write(`<h2> Brak zgody! </h2>`); // WZOR NA OBWOD KOLA
+		// 		}
+		// 		const odpE = prompt('Czy chcesz obliczyć pole przekroju kuli? (t/n)');
+		// 		if(odpE == "t" || odpE == "tak"){
+		// 			document.write(`<h2>Pole przekroju = ${pi * Math.pow(odpA, 2)}cm </h2>`);
+		// 		}
+		// 		else{
+		// 			document.write(`<h2> Brak zgody! </h2>`); // WZOR NA OBWOD KOLA
+		// 		}
+		// 		const odpF = prompt('Czy chcesz obliczyć średnice kuli? (t/n)');
+		// 		if(odpF == "t" || odpF == "tak"){
+		// 			document.write(`<h2>Średnica = ${2 * odpA}cm </h2><br>`);
+		// 		}
+		// 		else{
+		// 			document.write(`<h2> Brak zgody! </h2>`); // WZOR NA OBWOD KOLA
+		// 		}
+		// 		const a = [ odpA ];
+		// 		if(a <= 0 ){ // JEŻELI PROMIEŃ BĘDZIE MNIEJSZY LUB RÓWNY ZERO WYŚWIETLA:
+		// 			document.write('<br><h3 style="color: red;">Podałeś liczby ujemne bądź równe zero spróbuj ponownie :(</h3>');
+		// 		}
+		// 		document.write(`<div class="wzory"><h1>WZORY:</h1><br>
+		// 							<p>Obwód = 2⋅π⋅r<br></p>
+		// 							<p>Pole powierzchni = 4⋅π⋅r<sup>2</sup><br></p>
+		// 							<p>Objętość = 4/3⋅π⋅r<sup>3</sup><br></p>
+		// 							<p>Pole przekroju = π⋅r<sup>2</sup><br></p>
+		// 							<p>Średnica = 2⋅r<br></p>
+		// 						</div>`);
+		// 	}
+		// 	else if(odp == "n" || odp == "nie"){
+		// 		document.write(`<br><br><h1>Brak zgody!</h1>`);
+		// 	}
+		// 	else{
+		// 			document.write("<h1>Nie napisałeś tak lub nie</h1>"); // sprzeczne do pierwszego alertu
+		// 	}
+		</script>
+	</head>
+</html>
