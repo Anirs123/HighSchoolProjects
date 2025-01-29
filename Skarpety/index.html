@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>e-Skarpetki.pl</h1>
+        </header>
+        <main>
+                <img src="skarpetki_pszczolki.jpg" alt="skerptki"><br>
+                <h2 id="cp" class="promocja"></h2>
+            <div class="ld">
+                <p class="lista">Lista zakupów:</p>
+                <ol>
+                    <li id="cena1" class="jeden">Podkolanówki - 16,50 zł</li>
+                    <li id="cena2" class="jeden">Getry damskie - 7,80 zł</li>
+                    <li id="cena3" class="jeden">Stopki 5 par - 25,00 zł</li>
+                </ol>
+                <p id="suma"></p>
+            </div>       
+        </main>
+        <section>
+            <p><strong>Podkolanówki Jeździeckie marki "COMODO" SJBW</strong></p>
+            <p><strong>Model: Pszczoły</strong></p>
+            <p><strong id="rozmiar">Rozmiar: M</strong></p>
+            <p>Modne i wygodne podkolanówki zaprojektowane i wyprodukowane w firmie Comodo z myślą o<br>
+            osobach uprawiających jazdę konną.
+            </p>
+            <ul>
+                <li class="dwa"><strong> wygodę</strong> - zastosowana podczas szycia technologia tzw. "płaski szew" eliminuje ucisk i<br>
+                powstawanie otarć,
+                </li>
+                <li class="dwa"><strong> komfort</strong> - 80%-owy naturalny materiał jakim jest bawełna zapewnia komfort termiczny, a<br>
+                zastosowany bezuciskowy ściągacz optymalnie zabezpiecza ułożenie podkolanówki,
+                </li>
+                <li class="dwa"><strong> wytrzymałość</strong> - specjalne wzmocnienie części stopa-pięta, 5%-y dodatek elastanu gwarantuje<br>
+                najwyższą trwałość podkolanówki,
+                </li>
+            </ul>
+            <p>Bardzo szeroka gama kolorów, zabawne motywy pozwalają wyróżnić się wśród przyjaciół ze stajni i nie
+            tylko.
+            </p>
+            <div class="dataak" id="czas"></div>
+        </section>
+        <img class="logo" src="javascript.png">
+        <div class="stopa">
+			<h3> Stronę wykonał - Szymon B
+		</div>
+        <script>
+
+            //4. Po starcie strony losuje się cena promocyjna (od 10 do 20 zł)/////////////////////////////////////////////////////////
+            const cena_promocyjna = Math.floor(Math.random() * (20 - 10 + 1) + 10)
+            const cp = document.getElementById("cp");
+            cp.innerHTML = "Cena promocyjna: " + "<span id='kolorek'>" + cena_promocyjna + "</span>" + " zł";
+            document.getElementById("kolorek").style.color = "red";
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            //1. Klikanie zmienia kolejne rozmiary (S,M,L,XL)//////////////////////////////////////////////////////////////////////////
+            const rozmiar = document.getElementById("rozmiar");
+            function jakasfunkcja(){
+                let rozmiarX = rozmiar.innerText.slice(-2).trim();
+                //rozmiarX daje nam element html rozmiar innertext da nam tekst a slice wytnie ostatnie dwie litery
+                //trim wycina nam spacje jezeli je znajdzie
+                const rozmiary = ["S", "M", "L", "XL"]; //lista
+                let i = rozmiary.indexOf(rozmiarX); //pobieramy obecny rozmiar czyli to co jest wyswietlane na stronie obecnie
+                i += 1; //zwiększamy o jeden rozmiar gdy np pobieramy M on da nam wiekszy czyli L
+                if(i > (rozmiary.length)-1){ //jezeli jestesmy na xl i ponownie klikniemy wracamy na poczatek listy
+                    //length -1 to XL
+                    i = 0; //wracamy do S
+                }
+                rozmiar.innerText = "Rozmiar: " + rozmiary[i]; //wyciągamy z tablicy element o indeksie i
+            }
+            rozmiar.addEventListener("click", jakasfunkcja); //jakasfunkcja musi istnieć dlatego na dole
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //2. Po kliknięciu można zmienić cenę//////////////////////////////////////////////////////////////////////////////////////
+            const suma = document.getElementById("suma");
+            const podkolanowki = document.getElementById("cena1");
+            let nowa_cena1 = 16.50
+            function zmianaceny1(){
+                const nowacena1 = parseFloat(prompt("Podaj nową cenę!", "10.25"));
+                nowa_cena1 = nowacena1
+                if(nowacena1 <= 0 || isNaN(nowacena1)){
+                    alert("Podałeś błędną cenę! (Cena powinna być większą od zera!)");
+                    location.reload();
+                }
+                else{
+                    podkolanowki.innerText = "Podkolanówki - " + nowacena1 + " zł";
+                }
+                // console.log(nowa_cena1, nowa_cena2, nowa_cena3)
+                let razemcena = (nowa_cena1 + nowa_cena2 + nowa_cena3);
+                // console.log(razemcena)
+                suma.innerText = "Razem: " + razemcena + " zł";
+            }
+            podkolanowki.addEventListener("click", zmianaceny1);
+            
+            const getry = document.getElementById("cena2");
+            let nowa_cena2 = 7.80
+            function zmianaceny2(){
+                const nowacena2 = parseFloat(prompt("Podaj nową cenę!", "10.25"));
+                nowa_cena2 = nowacena2
+                if(nowacena2 <= 0 || isNaN(nowacena2)){
+                    alert("Podałeś błędną cenę! (Cena powinna być większą od zera!)");
+                    location.reload();
+                }
+                else{
+                    getry.innerText = "Getry damskie - " + nowacena2 + " zł";
+                }
+                // console.log(nowa_cena1, nowa_cena2, nowa_cena3)
+                let razemcena = (nowa_cena1 + nowa_cena2 + nowa_cena3);
+                // console.log(razemcena)
+                suma.innerText = "Razem: " + razemcena + " zł";
+            }
+            getry.addEventListener("click", zmianaceny2);
+
+            const stopki = document.getElementById("cena3");
+            let nowa_cena3 = 25.00
+            function zmianaceny3(){
+                let nowacena3 = parseFloat(prompt("Podaj nową cenę!", "10.25"));
+                nowa_cena3 = nowacena3
+                if(nowacena3 <= 0 || isNaN(nowacena3)){
+                    alert("Podałeś błędną cenę! (Cena powinna być większą od zera!)");
+                    location.reload();
+                }
+                else{
+                    stopki.innerText = "Stopki 5 par - " + nowacena3 + " zł";
+                }
+                // console.log(nowa_cena1, nowa_cena2, nowa_cena3)
+                let razemcena = (nowa_cena1 + nowa_cena2 + nowa_cena3);
+                // console.log(razemcena)
+                suma.innerText = "Razem: " + razemcena + " zł";
+            }
+            stopki.addEventListener("click", zmianaceny3);
+            // console.log(nowa_cena1, nowa_cena2, nowa_cena3)
+            let razemcena = (nowa_cena1 + nowa_cena2 + nowa_cena3);
+            // console.log(razemcena)
+            suma.innerText = "Razem: " + razemcena + " zł";
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //5. Podaje się bieżąca data///////////////////////////////////////////////////////////////////////////////////////////////
+            var today = new Date();
+            var dd = today.getDate();
+
+            var mm = today.getMonth()+1; 
+            var yyyy = today.getFullYear();
+            if(dd<10) 
+            if(dd<10) 
+            {
+                dd='0'+dd;
+            }
+            if(mm<10) 
+            {
+                mm='0'+mm;
+            }
+            today = yyyy+'-'+mm+'-'+dd;
+            czas.innerHTML = `<p style="color: red;"><strong> ${today} </strong><p>`
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        </script>
+    </body>
+</html>
