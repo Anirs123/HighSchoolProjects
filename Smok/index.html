@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <title>Powtorzenie</title>
+</head>
+<body>
+    <div class="strona">
+        <h1 id="tytul">Kolorowa tabela</h1>
+        <div class="pierwszy">
+            <table id="tabela">
+                <tr>
+                    <th>Ilość</th>
+                    <th>Cena za szt.</th>
+                    <th>Razem</th>
+                  </tr>
+                  <tr>
+                    <td id="AA1">12</td>
+                    <td id="AA2">13.50</td>
+                    <td id="AA3">?</td>
+                  </tr>
+                  <tr>
+                    <td id="BB1">7</td>
+                    <td id="BB2">21.00</td>
+                    <td id="BB3">?</td>
+                  </tr>
+                  <tr>
+                    <td id="CC1">21</td>
+                    <td id="CC2">7.65</td>
+                    <td id="CC3">?</td>
+                  </tr>
+                  <tr>
+                    <td id="DD1">33</td>
+                    <td id="DD2">18.50</td>
+                    <td id="DD3">?</td>
+                  </tr>
+            </table>  
+        </div>
+        <div class="drugi">
+            <button id="b1">Numer Koloru</button>
+            <button id="b2">Nazwa Koloru</button>
+            <button id="b3">Losowanie Koloru</button>
+            <button id="b4"></button>
+        </div>
+        <div class="trzeci">
+            <img id="smok" src="smok.jpg">
+        </div>  
+    </div>
+</body>
+<script>
+    //ZADANIE 1
+    const colours = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "aqua", "brown", "black", "white", "silver", "gold", "cyan", "gray"];
+    
+    // mozna zrobic tez tak ale to wyswietli wszystkie elementy czyli 0,1,2,3,4,5,6 a chyba chodziło o to aby było jak najprościej i najlepiej
+    // uzywamy petli for dla naszej tablicy i powtarza sie dopóki nie przeleci przez wsyzstkie elementy tablicy
+    // for (let i = 0; i < colours.length; i++) {
+    //     ilosc += i + ", ";
+    //     // co kazdy element tablicy dostawia nam ", " tylko problem jest ze na końcu tez da wiec trzeba przyciąc dwie ostatnie litery
+    // }
+    // ilosc = ilosc.slice(0, -2);
+    // usuniecie dwoch ostatnich liter
+
+    let pusty = document.getElementById("b4");
+    let nrkoloru = document.getElementById("b1");
+    nrkoloru.addEventListener("click", function(){
+        let ilosc = "Wybierz numer koloru od 1 do " + colours.length;
+        let wynik = parseInt(prompt(ilosc)) - 1;
+        if(colours[wynik] === undefined){ //sprawdzanie czy podano element który znajduje sie w tablicy
+            alert("Podano nie poprawnie liczbę z przedziału!")
+            pusty.innerText = "Błędna liczba!";
+        }
+        else{
+            pusty.innerText = colours[wynik]; //wyswietli nazwe koloru poprzez wynik ktory podalismy
+        }
+    })
+    //ZADANIE 2
+    let nwkoloru = document.getElementById("b2");
+    nwkoloru.addEventListener("click", function(){
+        let nazwakoloru = prompt("Podaj nazwę koloru")
+        if(colours.includes(nazwakoloru)){
+            document.body.style.backgroundColor = nazwakoloru;
+        }
+        else{
+            colours.push(nazwakoloru);
+            // console.log(colours);
+            document.body.style.backgroundColor = nazwakoloru;
+        }
+    })
+    //ZADANIE 3
+    let loskoloru = document.getElementById("b3");
+    loskoloru.addEventListener("click", function(){
+        let losowanie = Math.floor(Math.random() * colours.length); // otzymamy losowa liczbe od 0 do 14);
+        console.log(losowanie);
+        let smok = document.getElementById("smok");
+        smok.style.border = "15px solid " + colours[losowanie];
+        //ZADANIE 4 
+        //Nie wiem o co chodzi z nazwą koloru więc wyświetlę nazwę koloru borderu w czwartym buttonie
+        console.log(colours[losowanie]);
+        pusty.innerText = colours[losowanie];
+    })
+    //ZADANIE 5
+    function sumowanie(){// robie ten caly fragment jako funkcje ktora pozniej sobie odpale w zadanku 6
+    let AA1 = parseFloat(document.getElementById("AA1").innerText);
+    let AA2 = parseFloat(document.getElementById("AA2").innerText);
+    let AA3 = document.getElementById("AA3");
+    let BB1 = parseFloat(document.getElementById("BB1").innerText);
+    let BB2 = parseFloat(document.getElementById("BB2").innerText);
+    let BB3 = document.getElementById("BB3");
+    let CC1 = parseFloat(document.getElementById("CC1").innerText);
+    let CC2 = parseFloat(document.getElementById("CC2").innerText);
+    let CC3 = document.getElementById("CC3");
+    let DD1 = parseFloat(document.getElementById("DD1").innerText);
+    let DD2 = parseFloat(document.getElementById("DD2").innerText);
+    let DD3 = document.getElementById("DD3");
+    let sumaAA3 = AA1 * AA2;
+    AA3.innerText = sumaAA3;
+    // console.log(AA1);
+    // console.log(sumaAA3);
+    let sumaBB3 = BB1 * BB2;
+    BB3.innerText = sumaBB3;
+
+    let sumaCC3 = CC1 * CC2;
+    CC3.innerText = sumaCC3;
+
+    let sumaDD3 = DD1 * DD2;
+    DD3.innerText = sumaDD3;
+    }
+    sumowanie();
+
+    ElementyTabeli = ["AA1", "AA2", "BB1", "BB2", "CC1", "CC2", "DD1", "DD2"].forEach(function(i){
+        document.getElementById(i).addEventListener("click", function() {
+            // console.log(i);
+            let nowawartosc = prompt("Wpisz nową wartość:");
+            document.getElementById(i).innerText = nowawartosc;
+            // console.log(i);
+            sumowanie();
+        });
+    });
+    //zadanie 7
+    tytul = document.getElementById("tytul");
+    tytul.addEventListener("click", function(){
+        let komorkiTabeli = document.querySelectorAll("#tabela");
+        komorkiTabeli.forEach(function(komorka){
+            let teraz = new Date();
+            let terazsekunda = teraz.getSeconds();
+            let wynikzad7 = parseInt(terazsekunda / 4);
+            // console.log(terazsekunda);
+            // console.log(wynikzad7);
+            komorka.style.backgroundColor = colours[wynikzad7];
+        })
+    })
+    //zadanie 8
+    nrwtablicy = 0;
+    smok.addEventListener("click", function(){
+        tablicasmokow = ["smok2.jpg", "smok3.jpg", "smok.jpg"];
+        smok.src = tablicasmokow[nrwtablicy];
+        nrwtablicy++;
+        if (nrwtablicy >= tablicasmokow.length) {
+            nrwtablicy = 0; //wroci nam do poczatku czyli pierwszego obrazka z tablicy
+        }
+    })
+    //zadanie 9
+    let tytulywtabeli = document.querySelectorAll("#tabela th");
+
+    tytulywtabeli.forEach(function(tytulww){
+        tytulww.addEventListener("click", function(){
+            let komorkiTabeli = document.querySelectorAll("#tabela td");
+            komorkiTabeli.forEach(function(komorka){
+                komorka.style.backgroundColor = "white";
+            })
+        })
+    });
+</script>
+</html>
